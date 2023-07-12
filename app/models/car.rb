@@ -9,4 +9,7 @@ class Car < ApplicationRecord
   validates :fuel_consumption, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :img, presence: true
 
+  def brand_and_model
+    "#{brand} #{model}"
+  end
 end

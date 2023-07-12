@@ -8,6 +8,10 @@ class User < ApplicationRecord
   validates :birth_date, presence: true
   validate :minimum_age_of_18
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   private
   def minimum_age_of_18
     return if birth_date.blank?
