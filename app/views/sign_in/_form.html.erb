@@ -1,0 +1,25 @@
+<%= form_with(model: user, url:sign_in_path) do |form| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form_item">
+      <input type="text" placeholder="Email">
+  </div>
+
+  <div class="form_item">
+      <input type="password" placeholder="Password">
+  </div>
+
+  <div class="form_item">
+      <input class="btn" type="submit" value="УВІЙТИ">
+  </div>
+<% end %>
