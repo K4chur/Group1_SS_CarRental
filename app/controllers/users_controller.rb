@@ -1,45 +1,57 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  layout "base_layout", only: [ :sign_in, :sign_up]
+  before_action :set_user, only: %i[ show update destroy ]
 
-  # GET /users or /users.json
-  def index
-    @users = User.all
+  def profile
+    @user = User.find(session[:user_id])
+    @rentals = Rental.where(user_id: session[:user_id])
   end
 
-  # GET /users/1 or /users/1.json
-  def show
-    @user = User.find(params[:id])
+  def edit
+    @user = User.find(session[:user_id])
   end
 
-  # GET /users/new
-  def new
+  def sign_in
     @user = User.new
   end
 
-  # GET /users/1/edit
-  def edit
+  def login
+    #test code
+    if !session[:user_id]
+      session[:user_id] = User.first.id
+    end
+
+    redirect_to home_path
+  end
+  def sign_up
+    @user = User.new
   end
 
-  # POST /users or /users.json
-  def create
+  def register
     @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
+        session[:user_id] = @user.id
+
+        format.html { redirect_to home_path, notice: "User was successfully created." }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :sign_up, status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+  end
+  def logout
+    session[:user_id] = nil
+
+    redirect_to action: :sign_in
   end
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
+        format.html { redirect_to profile, notice: "User was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +65,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
+      format.html { redirect_to sign_up, notice: "User was successfully destroyed." }
       format.json { head :no_content }
     end
   end

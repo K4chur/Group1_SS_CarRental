@@ -1,8 +1,7 @@
-<%= form_with(model: rental) do |form| %>
+<%= form_with(model: rental, url: create_rental_path) do |form| %>
   <% if rental.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(rental.errors.count, "error") %> prohibited this rental from being saved:</h2>
-
       <ul>
         <% rental.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,21 +10,83 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :car_id %>
-    <%= form.collection_select :car_id, Car.all, :id, :brand_and_model %>
-    <br>
-    <%= form.label :user_id %>
-    <%= form.collection_select :user_id, User.all, :id, :full_name %>
-    <br>
-    <%= form.label :date_from %>
-    <%= form.datetime_field :date_from %>
-    <br>
-    <%= form.label :date_to %>
-    <%= form.datetime_field :date_to %>
-  </div>
+  <form class="rent-car-form">
+    <div class="car-form-item rent-car-form-car-info flex-row">
+      <h2> <%= rental.car.brand %> <%= rental.car.model %> </h2>
+      <h2> <%= rental.car.daily_price %>$</h2>
+    </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
+    <p>
+      Дата та час оренди:
+    </p>
+
+    <div class="car-form-item rent-car-form-time flex-row">
+      <input type="date" id="start-date">
+      <input type="time" id="start-time">
+    </div>
+
+    <p>
+      Дата та час повернення автомобіля:
+    </p>
+
+    <div class="car-form-item rent-car-form-time flex-row">
+      <input type="date" id="end-date">
+      <input type="time" id="end-time">
+    </div>
+
+    <h2 class="car-form-item" style="text-align:center">Остаточна Ціна</h2>
+
+    <div class="car-form-item">
+      <div class="flex-row">
+        <h4>Ціна за добу:&nbsp</h4>
+        <p class="text-gray"><%= rental.car.daily_price %>$</p>
+      </div>
+
+      <div class="flex-row">
+        <h4>Всього днів:&nbsp</h4>
+        <p class="text-gray" id="total-days"></p>
+      </div>
+
+      <div class="flex-row">
+        <h4>Остаточна ціна:&nbsp</h4>
+        <p class="text-gray" id="total-price">$</p>
+      </div>
+    </div>
+
+    <button type="submit" class="btn">
+      <h3>ЗАБРОНЮВАТИ АВТО</h3>
+    </button>
+  </form>
+
 <% end %>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var startDateInput = document.getElementById("start-date");
+        var startTimeInput = document.getElementById("start-time");
+        var endDateInput = document.getElementById("end-date");
+        var endTimeInput = document.getElementById("end-time");
+        var totalDaysElement = document.getElementById("total-days");
+        var totalPriceElement = document.getElementById("total-price");
+
+        // Add event listeners to the date and time inputs
+        startDateInput.addEventListener("input", calculateTotal);
+        startTimeInput.addEventListener("input", calculateTotal);
+        endDateInput.addEventListener("input", calculateTotal);
+        endTimeInput.addEventListener("input", calculateTotal);
+
+        function calculateTotal() {
+            var startDate = new Date(startDateInput.value + "T" + startTimeInput.value);
+            var endDate = new Date(endDateInput.value + "T" + endTimeInput.value);
+
+            var timeDiff = Math.abs(endDate - startDate);
+            var diffDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+            var dailyPrice = <%= rental.car.daily_price %>;
+            var totalPrice = diffDays * dailyPrice;
+
+            totalDaysElement.innerText = diffDays;
+            totalPriceElement.innerText = totalPrice + "$";
+        }
+    });
+</script>

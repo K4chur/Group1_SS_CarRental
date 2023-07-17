@@ -1,15 +1,63 @@
 <div id="<%= dom_id rental %>">
-  <p>
-    <strong>Car:</strong>
-    <%= rental.car %> <%= rental.car.brand %>
-    <br/>
-    <strong>User:</strong>
-    <%= rental.user %>
-    <br/>
-    <strong>Date from:</strong>
-    <%= rental.date_from%>
-    <br/>
-    <strong>Date to:</strong>
-    <%= rental.date_to %>
-  </p>
+
+  <div class="rental-info-card-img">
+    <%= image_tag ("car_images/#{rental.car.img}") %>
+  </div>
+
+  <div class="rental-info">
+    <div class="rental-info-car-name">
+      <h2> <%= rental.car.brand %> <%= rental.car.model %></h2>
+    </div>
+
+    <div class="rental-info-car-info flex-row">
+      <div class="flex-row">
+        <h4>Двигун:&nbsp</h4>
+        <p class="text-gray"><%= rental.car.engine_capacity %>л (<%= rental.car.fuel_type %>)</p>
+      </div>
+
+      <div class="flex-row">
+        <h4>Витрати пального:&nbsp</h4>
+        <p class="text-gray"><%= rental.car.fuel_consumption %>л/100км</p>
+      </div>
+
+      <div class="flex-row">
+        <h4>Коробка:&nbsp</h4>
+        <p class="text-gray"><%= rental.car.gearbox %></p>
+      </div>
+
+
+    </div>
+
+    <div class="rental-info-car-info flex-row">
+      <div class="flex-row">
+        <h4>Ціна за добу:&nbsp</h4>
+        <p class="text-gray"><%= rental.car.daily_price %>$</p>
+      </div>
+
+      <div class="flex-row">
+        <h4>Всього днів:&nbsp</h4>
+        <p class="text-gray">
+          <%=((rental.date_to - rental.date_from)/1.day + 1).to_i %>
+        </p>
+      </div>
+
+      <div class="flex-row">
+        <h4>Остаточна ціна:&nbsp</h4>
+        <p class="text-gray"><%=(((rental.date_to - rental.date_from)/1.day + 1).to_i)*rental.car.daily_price %>$</p>
+      </div>
+    </div>
+
+    <div class="rental-info-time flex-row">
+      <div class="flex-row">
+        <p>Орендовано:</p>
+        <p><%= rental.date_from.strftime("%d.%m.%Y %H:%M") %></p>
+      </div>
+
+      <div class="flex-row">
+        <p>Повернути:</p>
+        <p><%= rental.date_to.strftime("%d.%m.%Y %H:%M") %></p>
+      </div>
+    </div>
+  </div>
+
 </div>

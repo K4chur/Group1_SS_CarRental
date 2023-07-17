@@ -1,24 +1,45 @@
 <div id="<%= dom_id car %>">
-  <p>
-    <strong>Brand:</strong>
-    <%= car.brand %>
-    <br/>
-    <strong>Model:</strong>
-    <%= car.model %>
-    <br/>
-    <strong>Engine capacity:</strong>
-    <%= car.engine_capacity %>
-    <br/>
-    <strong>Type of fuel:</strong>
-    <%= car.fuel_type %>
-    <br/>
-    <strong>Daily price:</strong>
-    <%= car.daily_price %>
-    <br/>
-    <strong>Fuel consumption:</strong>
-    <%= car.fuel_consumption %>
-    <br/>
-    <strong>Image route:</strong>
-    <%= car.img %>
-  </p>
+
+  <div class="car-card">
+    <div class="car-info-block flex-row">
+      <div class="align-left">
+        <h2 class="car-name"><%= car.brand %> <%= car.model %></h2>
+        <p class="text-gray"><%= car.gearbox %>, <%= car.engine_capacity %></p>
+      </div>
+
+      <div class="align-right flex-row">
+        <h2 style="margin-right: 10px"><%= car.daily_price %>$</h2>
+        <p class="text-gray" style="margin-top: 5px">/ за добу прокату</p>
+      </div>
+    </div>
+
+    <div class="car-ditails-block">
+      <div class="car-img-block">
+        <%= image_tag ("car_images/" + car.img) %>
+      </div>
+
+      <div class="car-addition-info">
+        <div class="flex-row card-item">
+          <h4>Двигун:</h4>
+          <p class="text-gray"><%= car.engine_capacity %>л (<%= car.fuel_type %>)</p>
+        </div>
+        <hr>
+        <div class="flex-row card-item">
+          <h4>Витрати пального:</h4>
+          <p class="text-gray"><%= car.fuel_consumption %>л/100км</p>
+        </div>
+        <hr>
+        <div class="flex-row card-item">
+          <h4>Коробка:</h4>
+          <p class="text-gray"><%= car.gearbox %></p>
+        </div>
+        <hr>
+        <div class="card-btn">
+          <%= link_to new_rental_path(car_id: car.id), class: "btn" do %>
+            <h3>ЗАБРОНЮВАТИ АВТО</h3>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

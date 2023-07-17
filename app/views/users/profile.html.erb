@@ -1,0 +1,36 @@
+<div class="wrapper">
+  <div class="default-container profile-data-container flex-row">
+    <div class="flex-row">
+      <h2 class="text-gray">Ім'я Фамілія:&nbsp</h2>
+      <h2><%= @user.full_name %></h2>
+    </div>
+
+    <div class="flex-row">
+      <h2 class="text-gray">Email:&nbsp</h2>
+      <h2><%= @user.email %></h2>
+    </div>
+
+    <div class="flex-row">
+      <h2 class="text-gray">Дата народження:&nbsp</h2>
+      <h2><%= @user.birth_date %></h2>
+    </div>
+
+    <a class="btn" href="/users/edit">ВІДРЕДАГУВАТИ</a>
+  </div>
+
+  <h1 class="rental-info-list-title">Орендовані автомобілі:</h1>
+
+
+  <div class="default-container" style="margin-top: 50px">
+    <div class="rental-info-card flex-row">
+      <% if @rentals.present? %>
+        <% @rentals.each do |rental| %>
+          <%= render rental %>
+        <% end %>
+      <% else %>
+        <p>No rents found in database.</p>
+      <% end %>
+    </div>
+  </div>
+
+</div>

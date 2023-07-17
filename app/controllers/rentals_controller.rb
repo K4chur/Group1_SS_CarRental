@@ -6,18 +6,13 @@ class RentalsController < ApplicationController
     @rentals = Rental.all
   end
 
-  # GET /rentals/1 or /rentals/1.json
-  def show
-    @rental = Rental.find{params[:id]}
-  end
-
   # GET /rentals/new
   def new
     @rental = Rental.new
-  end
-
-  # GET /rentals/1/edit
-  def edit
+    @car = Car.find(params[:car_id]) # Replace `params[:car_id]` with the actual parameter holding the car ID
+    @user = User.find(session[:user_id])
+    # Associate the car with the rental
+    @rental.car = @car
   end
 
   # POST /rentals or /rentals.json
@@ -27,7 +22,7 @@ class RentalsController < ApplicationController
     respond_to do |format|
       if @rental.save
         format.html { redirect_to rental_url(@rental), notice: "Rental was successfully created." }
-        format.json { render :show, status: :created, location: @rental }
+        format.json { render :profile, status: :created, location: @rental }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @rental.errors, status: :unprocessable_entity }

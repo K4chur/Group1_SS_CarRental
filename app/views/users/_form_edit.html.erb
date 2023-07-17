@@ -1,4 +1,4 @@
-<%= form_with(model: user, url:sign_up_path) do |form| %>
+<%= form_with(model: user, url: edit_path) do |form| %>
   <% if user.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -12,26 +12,26 @@
   <% end %>
 
   <div class="form_item">
-      <%= form.text_field :first_name, placeholder: "First Name*" %>
+    <%= form.text_field :first_name, placeholder: "First Name*" %>
   </div>
 
   <div class="form_item">
-      <%= form.text_field :last_name, placeholder: "Last Name*" %>
+    <%= form.text_field :last_name, placeholder: "Last Name*" %>
   </div>
 
   <div class="form_item">
-      <%= form.date_field :birth_date, title: "Date of birth" %>
+    <%= form.date_field :birth_date, title: "Date of birth" %>
   </div>
 
   <div class="form_item">
-      <%= form.text_field :email, placeholder: "Email*" %>
+    <%= form.email_field :email, placeholder: "Email*" %>
   </div>
 
   <div class="form_item">
-      <%= form.password_field :password, placeholder: "Password*" %>
+    <%= form.password_field :password, placeholder: "Password*" %>
   </div>
 
   <div class="form_item">
-      <%= form.submit "ЗАРЕЄСТРУВАТИСЬ", class: "btn"%>
+    <%= form.submit "Відредагувати", class: "btn" %>
   </div>
 <% end %>
