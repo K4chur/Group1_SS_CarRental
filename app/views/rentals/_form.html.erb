@@ -11,6 +11,8 @@
   <% end %>
 
   <form class="rent-car-form">
+    <%= form.hidden_field :car_id, value: @car.id %>
+    <%= form.hidden_field :user_id, value: @user.id %>
     <div class="car-form-item rent-car-form-car-info flex-row">
       <h2> <%= rental.car.brand %> <%= rental.car.model %> </h2>
       <h2> <%= rental.car.daily_price %>$</h2>
@@ -21,8 +23,7 @@
     </p>
 
     <div class="car-form-item rent-car-form-time flex-row">
-      <input type="date" id="start-date">
-      <input type="time" id="start-time">
+      <%= form.datetime_local_field :date_from, id: "start-datetime" %>
     </div>
 
     <p>
@@ -30,8 +31,7 @@
     </p>
 
     <div class="car-form-item rent-car-form-time flex-row">
-      <input type="date" id="end-date">
-      <input type="time" id="end-time">
+      <%= form.datetime_local_field :date_to, id: "end-datetime" %>
     </div>
 
     <h2 class="car-form-item" style="text-align:center">Остаточна Ціна</h2>
@@ -49,7 +49,7 @@
 
       <div class="flex-row">
         <h4>Остаточна ціна:&nbsp</h4>
-        <p class="text-gray" id="total-price">$</p>
+        <p class="text-gray" id="total-price"></p>
       </div>
     </div>
 
@@ -62,31 +62,27 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        var startDateInput = document.getElementById("start-date");
-        var startTimeInput = document.getElementById("start-time");
-        var endDateInput = document.getElementById("end-date");
-        var endTimeInput = document.getElementById("end-time");
+        var startDatetimeInput = document.getElementById("start-datetime");
+        var endDatetimeInput = document.getElementById("end-datetime");
         var totalDaysElement = document.getElementById("total-days");
         var totalPriceElement = document.getElementById("total-price");
+        var dailyPrice = <%= rental.car.daily_price %>;
 
-        // Add event listeners to the date and time inputs
-        startDateInput.addEventListener("input", calculateTotal);
-        startTimeInput.addEventListener("input", calculateTotal);
-        endDateInput.addEventListener("input", calculateTotal);
-        endTimeInput.addEventListener("input", calculateTotal);
+        // Add event listeners to the datetime inputs
+        startDatetimeInput.addEventListener("input", calculateTotal);
+        endDatetimeInput.addEventListener("input", calculateTotal);
 
         function calculateTotal() {
-            var startDate = new Date(startDateInput.value + "T" + startTimeInput.value);
-            var endDate = new Date(endDateInput.value + "T" + endTimeInput.value);
+            var startDatetime = new Date(startDatetimeInput.value);
+            var endDatetime = new Date(endDatetimeInput.value);
 
-            var timeDiff = Math.abs(endDate - startDate);
+            var timeDiff = Math.abs(endDatetime - startDatetime);
             var diffDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-            var dailyPrice = <%= rental.car.daily_price %>;
             var totalPrice = diffDays * dailyPrice;
 
-            totalDaysElement.innerText = diffDays;
-            totalPriceElement.innerText = totalPrice + "$";
+            totalDaysElement.textContent = diffDays;
+            totalPriceElement.textContent = totalPrice + "$";
         }
     });
 </script>
