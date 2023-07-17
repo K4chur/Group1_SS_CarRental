@@ -11,8 +11,10 @@ class RentalsController < ApplicationController
     @rental = Rental.new
     @car = Car.find(params[:car_id]) # Replace `params[:car_id]` with the actual parameter holding the car ID
     @user = User.find(session[:user_id])
+
     # Associate the car with the rental
     @rental.car = @car
+    @rental.user = @user
   end
 
   # POST /rentals or /rentals.json
@@ -21,7 +23,7 @@ class RentalsController < ApplicationController
 
     respond_to do |format|
       if @rental.save
-        format.html { redirect_to rental_url(@rental), notice: "Rental was successfully created." }
+        format.html { redirect_to home_path, notice: "Rental was successfully created." }
         format.json { render :profile, status: :created, location: @rental }
       else
         format.html { render :new, status: :unprocessable_entity }
