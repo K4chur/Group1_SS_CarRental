@@ -1,18 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
-<%= link_to "Users", users_path %>
-<%= link_to "Cars", cars_path %>
-<%= link_to "Rentals", rentals_path %>
-
-<h1>Cars</h1>
-
-<div id="cars">
-  <% @cars.each do |car| %>
-    <%= render car %>
-    <p>
-      <%= link_to "Show this car", car %>
-    </p>
-  <% end %>
+<div class="wrapper">
+  <div class="car-container">
+    <% @cars.each do |car| %>
+      <%= render car %>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New car", new_car_path %>

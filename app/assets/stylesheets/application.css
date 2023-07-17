@@ -54,7 +54,7 @@ header {
 header li {
     list-style: none;
     display: inline-block;
-    
+
     padding-right: 20px;
 }
 
@@ -126,7 +126,15 @@ input {
 .btn:hover {
     background-color: rgb(124, 179, 41);
 }
+/*--Danger-Alert-Styles--------------*/
 
+.danger-alert {
+    padding: 10px;
+}
+
+.danger-alert * {
+    color: #a11c29;
+}
 /*Home Page--------------------------*/
 
 .wrapper {
@@ -208,6 +216,10 @@ input {
 
 .card-btn .btn {
     border-radius: 0px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
 }
 
 hr {
@@ -215,6 +227,50 @@ hr {
     border: none;
     background-color: var(--main_gray)
 }
+/*Rent-Car-Form*/
+
+.rent-car-container {
+    width: 700px;
+    height: auto;
+    padding: 30px;
+    box-sizing: border-box;
+    margin: auto;
+    margin-top: 70px;
+    background-color: #fff;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+
+}
+
+.rent-car-form .car-form-item {
+    margin-bottom: 30px;
+}
+
+.rent-car-form p {
+    margin-bottom: 10px;
+}
+
+.rent-car-form-car-info {
+    justify-content: space-between;
+}
+
+.rent-car-form-time input[type=time], input[type=date] {
+    border-radius: 0px;
+    border-color: #ADA8A8;
+}
+
+.rent-car-form-time input[type=time] {
+    background-color: var(--main_back);
+}
+
+.rent-car-form-time :first-child {
+    margin-right: 50px;
+}
+
+.rent-car-form button {
+    border-radius: 0px;
+}
+
+
 
 /*-Search-Car-Page----------------------------------*/
 
@@ -268,4 +324,65 @@ hr {
     padding: 10px;
     width: 230px;
     font-size: medium;
+}
+
+
+/*-Profile-Page------------------------------------*/
+
+.default-container {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+
+.profile-data-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 60px;
+}
+
+.profile-data-container a{
+    width: auto;
+    border-radius: 0px;
+    text-decoration: none;
+}
+
+.profile-data-container h2{
+    margin: auto;
+}
+
+
+.rental-info-card-img img{
+    height: 200px;
+}
+
+.rental-info-list-title {
+    margin-top: 50px;
+}
+
+.rental-info {
+    margin-left: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.rental-info-car-name * {
+    text-align: center;
+}
+
+.rental-info-car-info div {
+    margin-right: 50px;
+}
+
+.rental-info-time {
+    background-color: #F0F0F0;
+    box-sizing: border-box;
+    padding: 5px;
+    justify-content: space-around;
 }

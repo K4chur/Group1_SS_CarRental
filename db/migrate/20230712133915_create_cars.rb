@@ -4,6 +4,7 @@ class CreateCars < ActiveRecord::Migration[7.0]
       t.string :brand
       t.string :model
       t.float :engine_capacity
+      t.string :gearbox
       t.string :fuel_type
       t.float :daily_price
       t.float :fuel_consumption

@@ -15,6 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_12_134240) do
     t.string "brand"
     t.string "model"
     t.float "engine_capacity"
+    t.string "gearbox"
     t.string "fuel_type"
     t.float "daily_price"
     t.float "fuel_consumption"

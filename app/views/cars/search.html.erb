@@ -1,0 +1,67 @@
+<div class="search-car-container flex-row">
+  <div class="search-car-container-title">
+    <h1>Знайдіть Потрібний Автомобіль</h1>
+  </div>
+
+  <div class="search-car-container-form">
+    <form>
+      <div class="input-group flex-row">
+        <h2>Ціна*:</h2>
+
+        <div class="flex-row">
+          <input type="text" placeholder="Від ($)" name="price_from">
+          <input type="text" placeholder="До ($)" name="price_to">
+        </div>
+      </div>
+
+      <div class="input-group flex-row">
+        <h2>Паливо*:</h2>
+
+        <div>
+          <select class="form-select" name="fuel_type" id="fuel-select">
+            <option value="">Виберіть тип палива</option>
+            <option value="Бензин">Бензин</option>
+            <option value="Газ">Газ</option>
+            <option value="Газ / Бензин">Газ / Бензин</option>
+            <option value="Газ метан">Газ метан</option>
+            <option value="Газ пропан-бутан">Газ пропан-бутан</option>
+            <option value="Гібрид">Гібрид</option>
+            <option value="Дизель">Дизель</option>
+            <option value="Електро">Електро</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="input-group flex-row">
+        <h2>Коробка передач*:</h2>
+
+        <div>
+          <select class="form-select" name="gearbox" id="fuel-select">
+            <option value="">Виберіть тип коробки</option>
+            <option value="Автомат">Автомат</option>
+            <option value="Ручна">Ручна</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card-btn">
+        <button type="submit" class="btn">
+          <h3>ПОШУК</h3>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="wrapper">
+  <div class="car-container">
+    <% if @cars.present? %>
+      <% @cars.each do |car| %>
+        <%= render car %>
+      <% end %>
+    <% else %>
+      <p>No cars found based on the search criteria.</p>
+    <% end %>
+  </div>
+</div>
