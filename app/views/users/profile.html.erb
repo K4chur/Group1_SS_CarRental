@@ -21,7 +21,6 @@
   <h1 class="rental-info-list-title">Орендовані автомобілі:</h1>
 
   <div class="default-container" style="margin-top: 50px">
-    <div class="rental-info-card flex-row">
       <% if @rentals.present? %>
         <% @rentals.each do |rental| %>
           <%= render rental %>
@@ -29,6 +28,5 @@
       <% else %>
         <h2 style="text-align:center; width:100%">No rents found for this user.</h2>
       <% end %>
-    </div>
   </div>
 </div>

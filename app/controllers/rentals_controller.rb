@@ -11,7 +11,7 @@ class RentalsController < ApplicationController
   def new
     @rental = Rental.new
     @car = Car.find(params[:car_id]) # Replace `params[:car_id]` with the actual parameter holding the car ID
-    @user = User.find(session[:user_id])
+    @user = current_user
 
     # Associate the car with the rental
     @rental.car = @car

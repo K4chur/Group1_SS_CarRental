@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { 
     session: 'users/sessions',
-    registrations: 'users/registrations' 
+    registrations: 'users/registrations'
   }
 
   get '/rentals/new', to: 'rentals#new', as: :new_rental
@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   post '/users/update', to: 'users#update', as: :edit
 
   post '/users', to: 'registrations#create', as: :register
-
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
