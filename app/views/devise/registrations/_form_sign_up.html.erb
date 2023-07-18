@@ -1,11 +1,10 @@
-<%= form_with(model: user, url:register_path) do |form| %>
-  <% if user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
+<%= form_for(resource, as: resource_name, url: register_path) do |form| %>
+  <% if resource.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(resource.errors.count, "ошибка") %> в форме:</h2>
       <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% resource.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
@@ -24,7 +23,7 @@
   </div>
 
   <div class="form_item">
-    <%= form.text_field :email, placeholder: "Email*" %>
+    <%= form.email_field :email, placeholder: "Email*" %>
   </div>
 
   <div class="form_item">

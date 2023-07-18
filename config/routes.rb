@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: { 
+    session: 'users/sessions',
+    registrations: 'users/registrations' 
+  }
 
   get '/rentals/new', to: 'rentals#new', as: :new_rental
   post '/rentals/create', to: 'rentals#create', as: :create_rental
@@ -6,14 +10,6 @@ Rails.application.routes.draw do
   # Overrides internal mapping
   get '/cars/search', to: 'cars#search'
   resources :cars
-
-  get '/users/logout', to: 'users#logout'
-
-  get '/users/sign_in', to: 'users#sign_in'
-  post '/users/login', to: 'users#login', as: :login
-
-  get '/users/sign_up', to: 'users#sign_up'
-  post '/users/register', to: 'users#register', as: :register
 
   get '/users/profile', to: 'users#profile', as: :profile
 
@@ -24,5 +20,4 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   root "cars#index", as: :home
-
 end

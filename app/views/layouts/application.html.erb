@@ -11,7 +11,11 @@
   </head>
 
   <body>
-    <%= render partial: "shared/main_navbar"%>
+    <% if user_signed_in? %>
+       <%= render partial: "shared/main_navbar"%>
+    <% else %>
+       <%= render partial: "shared/navbar"%>
+    <% end %>
 
     <%= yield %>
   </body>
