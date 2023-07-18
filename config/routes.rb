@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post '/users/update', to: 'users#update', as: :edit
 
   post '/users', to: 'registrations#create', as: :register
+  get '/users/sign_up', to: 'registrations#new', as: :new_register
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

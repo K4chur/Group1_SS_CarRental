@@ -3,7 +3,7 @@
     <div id="error_explanation">
       <h2><%= pluralize(resource.errors.count, "ошибка") %> в форме:</h2>
       <ul>
-        <% resource.errors.full_messages.each do |message| %>
+        <% resource.errors.each do |attribute, message| %>
           <li><%= message %></li>
         <% end %>
       </ul>

@@ -10,10 +10,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  def new
+    super
+  end
   # POST /resource
   # def create
   #   super
   # end
+
+  def create
+    super do |resource|
+      flash[:notice] = flash[:notice].to_a.concat(resource.errors.full_messages) if resource.errors.any?
+      resource.errors.clear unless resource.errors.blank?
+    end
+  end
 
   # GET /resource/edit
   # def edit
