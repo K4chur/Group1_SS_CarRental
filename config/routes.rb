@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get '/users/edit', to: 'users#edit'
   post '/users/update', to: 'users#update', as: :edit
 
+  post '/users', to: 'registrations#create', as: :register
+
   resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
