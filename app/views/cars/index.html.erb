@@ -2,8 +2,12 @@
 
 <div class="wrapper">
   <div class="car-container">
-    <% @cars.each do |car| %>
-      <%= render car %>
+    <% if @cars.present? %>
+      <% @cars.each do |car| %>
+        <%= render car %>
+      <% end %>
+    <% else %>
+      <h2 style="text-align:center; width:100%">All cars are rented. Try using the <a href="/cars/search">search</a> to find the right car!</h2>
     <% end %>
   </div>
 </div>
