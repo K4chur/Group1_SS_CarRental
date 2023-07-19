@@ -1,14 +1,13 @@
 <%= form_for(resource, as: resource_name, url: register_path) do |form| %>
-  <% if resource.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(resource.errors.count, "ошибка") %> в форме:</h2>
-      <ul>
-        <% resource.errors.each do |attribute, message| %>
-          <li><%= message %></li>
+  <% flash.each do |name, msg| %>
+      <% if msg.class == Array %>
+        <% msg.each do |message| %>
+          <%= content_tag :div, message, id: "flash_#{name}" %>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <% else %>
+        <%= content_tag :div, msg, id: "flash_#{name}" %>
+      <% end %>
+    <% end %>
 
   <div class="form_item">
     <%= form.text_field :first_name, placeholder: "First Name*" %>

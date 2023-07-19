@@ -1,4 +1,4 @@
-<%= form_with(model: rental, url: create_rental_path) do |form| %>
+<%= form_with(model: rental, url: create_rental_path, html: { class: "rent-car-form" }) do |form| %>
   <% if rental.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(rental.errors.count, "error") %> prohibited this rental from being saved:</h2>
@@ -13,12 +13,13 @@
   <form class="rent-car-form">
     <%= form.hidden_field :car_id, value: @car.id %>
     <%= form.hidden_field :user_id, value: @user.id %>
+
     <div class="car-form-item rent-car-form-car-info flex-row">
       <h2> <%= rental.car.brand %> <%= rental.car.model %> </h2>
       <h2> <%= rental.car.daily_price %>$</h2>
     </div>
 
-    <p>
+    <p class="mb-10">
       Дата та час оренди:
     </p>
 
@@ -26,7 +27,7 @@
       <%= form.datetime_local_field :date_from, id: "start-datetime" %>
     </div>
 
-    <p>
+    <p class="mb-10">
       Дата та час повернення автомобіля:
     </p>
 
@@ -37,12 +38,12 @@
     <h2 class="car-form-item" style="text-align:center">Остаточна Ціна</h2>
 
     <div class="car-form-item">
-      <div class="flex-row">
+      <div class="flex-row mb-10">
         <h4>Ціна за добу:&nbsp</h4>
         <p class="text-gray"><%= rental.car.daily_price %>$</p>
       </div>
 
-      <div class="flex-row">
+      <div class="flex-row mb-10">
         <h4>Всього днів:&nbsp</h4>
         <p class="text-gray" id="total-days"></p>
       </div>
@@ -57,7 +58,6 @@
       <h3>ЗАБРОНЮВАТИ АВТО</h3>
     </button>
   </form>
-
 <% end %>
 
 <script>

@@ -245,7 +245,7 @@ hr {
     margin-bottom: 30px;
 }
 
-.rent-car-form p {
+.mb-10 {
     margin-bottom: 10px;
 }
 
@@ -253,17 +253,13 @@ hr {
     justify-content: space-between;
 }
 
-.rent-car-form-time input[type=time], input[type=date] {
+.rent-car-form-time input[type=time], input[type=date], input[type=datetime-local] {
     border-radius: 0px;
     border-color: #ADA8A8;
 }
 
-.rent-car-form-time input[type=time] {
+.rent-car-form-time input[type="time"] {
     background-color: var(--main_back);
-}
-
-.rent-car-form-time :first-child {
-    margin-right: 50px;
 }
 
 .rent-car-form button {

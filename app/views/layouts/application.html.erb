@@ -11,23 +11,12 @@
   </head>
 
   <body>
-
-    <% flash.each do |name, msg| %>
-      <% if msg.class == Array %>
-        <% msg.each do |message| %>
-          <%= content_tag :div, message, id: "flash_#{name}" %>
-        <% end %>
-      <% else %>
-        <%= content_tag :div, msg, id: "flash_#{name}" %>
-      <% end %>
-    <% end %>
-
     <% if user_signed_in? %>
        <%= render partial: "shared/main_navbar"%>
     <% else %>
        <%= render partial: "shared/navbar"%>
     <% end %>
-
+    
     <%= yield %>
   </body>
 </html>
